@@ -27,46 +27,68 @@ int rng(int lim) {
 	return uid(rang);
 }
 const int mod = 1000000007;
-const int N = 2e6+13, M = N;
 
 int mpow(int base, int exp); 
 //=======================
-vi g[N];
-int a[N];
 
 //=======================
+ll fi(ll n,ll x,ll p,vector<ll> a){
+    ll mi=INT_MAX-1,mp=0;
+  //cout<<n<<x<<p<<"a";   
+    fo(i,n){
+        if(a[i]==x){
+            if(abs(p-i)<mi){
+                mi=abs(p-i);
+                mp=i;
+            }
+        }
+    }
+    return mp;
+}
+ll solve() {
+    ll n,x,op,k;
+    vector<ll> a;
+cin>>n>>x>>op>>k;
 
-void solve() {
-    int n,x,k,p;
-  cin>>n>>x>>k>>p;
-  vector<int> a;
-fo(i,n){
-    int x;cin>>x;
-        a.push_back(x);
-}
-if(k>=n){
-    cout<<"-1"<<endl;
-   return;
-}
-else{
-sort(a.begin(),a.end());
-fo(i,n){
-    cout<<a[i]<<" ";
-}cout<<endl;
- return;
-}
+//cout<<N<<X<<p<<k<<" "; 
 
+fo(i,n){
+    ll x1;
+    cin>>x1;
+a.push_back(x1);
+}
+  sort(a.begin(),a.end());
+ll idx=fi(n,x,op,a);
+ll c =0;
+if(a[idx]!=x){
+    a[k-1]=x;
+   sort(a.begin(),a.end());
+    c++;
+}
+if(a[op-1]==x){
+    return c;
+}
+if(op<k&&a[op-1]<x){
+return -1;
+}
+if(op>k&&a[op-1]>x){
+return -1;
+}
+idx=fi(n,x,op,a)+1;
+ll z=c+abs(op-idx);
+return z;
 }
 
 int main() {
 	ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
-    int t = 1;
+    int t ;
 	cin >> t;
 	//deb(t);
     while(t--) {
-      solve();
+      cout<<solve()<<endl;
+    
     }
 
     return 0;
