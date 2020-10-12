@@ -1,0 +1,38 @@
+bin imp folder
+cat -shows text file
+nano xyz.txt -makes text file
+boot-boot files
+temp-erased everytime we reboot a comp
+mnt- empty dir for mountinmg suff
+whoami-shows which user it is
+sudo-super user do
+rm -rf(recursively delete)
+chmod +x start.sh(change permission to executable)
+echo-print
+echo 2+3>lolll.txt
+gitpod /workspace/NextSimpleStarter $ cat lolll.txt
+du-disk usage(-h human readable)
+echo- {> write ; >>append}
+
+
+package installers and all
+linux-distributions-debian,redhat,arch(best debian -stable,2nd -arch (good package manager),red hat (old asf and stable enterprises love this shii)
+cat /etc/os-release
+	NAME="Ubuntu"
+	VERSION="20.04 LTS (Focal Fossa)"
+	ID=ubuntu
+	ID_LIKE=debian
+package managers for each distro--
+debian -apt/apt-get
+arch -packman / yay
+
+
+sudo apt install firefox(install it)
+sudo apt searchfirefox
+sudo apt install_wget
+sudo apt upgrade 
+
+
+grep- grab regular expression patterns(search)
+
+
