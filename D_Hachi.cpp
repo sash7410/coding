@@ -1,9 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define gc getchar_unlocked
-#define fo(i,n) for(int i=0;i<n;i++)
+#define fo(i,a,b) for(int i=a;i<b;i++)
+#define rfo(i,a,b) for(int i=a;i>=b;i--)
+#define mfo(it,m) for(auto it=m.begin(); it!=m.end(); it++)
 #define Fo(i,k,n) for(int i=k;k<n?i<n:i>n;k<n?i+=1:i-=1)
-#define ll long long
+#define ll long long 
 #define si(x)	scanf("%d",&x)
 #define sl(x)	scanf("%lld",&x)
 #define ss(s)	scanf("%s",s)
@@ -27,43 +29,64 @@ int rng(int lim) {
 	return uid(rang);
 }
 const int mod = 1000000007;
-const int N = 2e6+13, M = N;
-
-int mpow(int base, int exp); 
-//=======================
-vi g[N];
-int a[N];
-int n, m, k;
-//=======================
-
+bool check_collinear(int x1, int y1, int x2, int y2, int x3, int y3){
+   int a = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2);
+ //cout<<a<<endl;
+   if (a == 0)
+      return 1;
+   else
+      return 0;
+}
 void solve() {
+	ll n;
   cin >> n;
-  vector<vector<ll> > a( n , vector<ll> (3));
-  fo(i,n){
-      vector<ll> b;
-      for(ll j=0;j<3;j++){
-     
-         cin>>a[i][j];
-      }
+  if(n%8==0){
+      cout<<"Yes"<<endl;
+      return;
   }
-ll dp[n+1]={};
-  dp[0]=0;
-  dp[1]=a[0][0];
-  dp[2]=(min(a[0][1],a[1][0])+dp[1]);
+   vector<ll> a;
+   while(n!=0){
+       a.push_back(n%10);
+       n/=10;
+   }
+   sort(a.begin(),a.end());
+     int z=0;
+   z+=a[a.size()-3]*100;
+    z+=a[a.size()-2]*10;
+     z+=a[a.size()-1];
+    // cout<<z<<endl;
+     if(z%8==0){
+         cout<<"Yes"<<endl;
+         return ;
+     }
+   while (next_permutation(a.begin(), a.end())){
+    z=0;
+   z+=a[a.size()-3]*100;
+    z+=a[a.size()-2]*10;
+     z+=a[a.size()-1];
+     //cout<<z<<endl;
+      if(z%8==0){
+         cout<<"Yes"<<endl;
+          return ;
+     }
+     }
+     cout<<"No"<<endl;
+  //unordered_map<ll> m;
+  
+   
+   
 
-  for(ll i=3;i<=n;i++){
     
-      dp[i]=(min(dp[i-1]+a[i-1][0],min(dp[i-2]+a[i-2][1],dp[i-3]+a[i-3][2])));
-  }
-  cout<<dp[n];
 }
 
 int main() {
 	ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
+    
       solve();
-   
+    
+
     return 0;
 }
 int mpow(int base, int exp) {
@@ -77,18 +100,3 @@ int mpow(int base, int exp) {
 	return result;
   }
 
- /* deb(dp[i-1]+a[i-1][0]);
-      deb(dp[i-2]+a[i-2][1]);
-      deb(dp[i-3]+a[i-3][2]);
-      cout<<endl;
-      deb(a[i-1][0]);
-      deb(a[i-2][1]);
-      deb(a[i-3][2]);
-      cout<<endl;*/
-       /* fo(i,n){
-     
-      for(int j=0;j<n;j++){
-        cout<<a[i][j]<<" ";
-      }
-      cout<<endl;
-  }*/

@@ -37,58 +37,60 @@ int n, m, k;
 //=======================
 
 void solve() {
-  cin >> n;
-  vector<vector<ll> > a( n , vector<ll> (3));
-  fo(i,n){
-      vector<ll> b;
-      for(ll j=0;j<3;j++){
-     
-         cin>>a[i][j];
-      }
-  }
-ll dp[n+1]={};
-  dp[0]=0;
-  dp[1]=a[0][0];
-  dp[2]=(min(a[0][1],a[1][0])+dp[1]);
-
-  for(ll i=3;i<=n;i++){
     
-      dp[i]=(min(dp[i-1]+a[i-1][0],min(dp[i-2]+a[i-2][1],dp[i-3]+a[i-3][2])));
+  cin >> n;
+  int a[n+1];
+  for(int i=1;i<=n;i++){
+      cin>>a[i];
   }
-  cout<<dp[n];
+  int dp[n+1];
+  vector<int> b;
+  
+   dp[1]=0;
+   b.push_back(-1);
+   b.push_back(-1);
+   b.push_back(1);
+   dp[2]=abs(a[2]-a[1]);
+ 
+  
+    for(int i=3;i<=n;i++){
+        int x=abs(a[i]-a[i-1])+dp[i-1];
+        int y=3*(abs(a[i]-a[i-2]))+dp[i-2];
+      if(x>=y){
+          dp[i]=y;
+         b.push_back(i-2);
+      }
+      else{
+          dp[i]=x;
+          b.push_back(i-1);
+      }
+       // dp[i]=min(a[i]-a[i-1]+dp[i-1],3*(a[i]-a[i-2])+dp[i-2]);
+
+    }
+  
+   int z=0,c[100000]={};
+    for(int j=n;j>0;j=b[j])
+    c[z++]=j;
+ 
+    cout<<dp[n]<<endl;
+    //b.push_back(n);
+    cout<<z<<endl;
+    for(int k=z-1;k>=0;k--){
+      cout<<c[k]<<" ";
+    }
+    //cout<<b.size()<<endl;
+    for(int i=0;i<b.size();i++){
+       // cout<<b[i]<<" ";
+    }	
+   // return dp[n-1];
 }
 
 int main() {
 	ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
-      solve();
+   
+     solve();
    
     return 0;
 }
-int mpow(int base, int exp) {
-	base %= mod;
-	int result = 1;
-	while (exp > 0) {
-	  if (exp & 1) result = ((ll)result * base) % mod;
-	  base = ((ll)base * base) % mod;
-	  exp >>= 1;
-	}
-	return result;
-  }
-
- /* deb(dp[i-1]+a[i-1][0]);
-      deb(dp[i-2]+a[i-2][1]);
-      deb(dp[i-3]+a[i-3][2]);
-      cout<<endl;
-      deb(a[i-1][0]);
-      deb(a[i-2][1]);
-      deb(a[i-3][2]);
-      cout<<endl;*/
-       /* fo(i,n){
-     
-      for(int j=0;j<n;j++){
-        cout<<a[i][j]<<" ";
-      }
-      cout<<endl;
-  }*/
